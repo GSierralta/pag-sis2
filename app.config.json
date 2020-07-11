@@ -1,0 +1,10 @@
+{
+    apps : [
+      {
+        name      : "pag_sist2",
+        script    : "npx",
+        interpreter: "none",
+        args: "npm start"
+      }
+    ]
+  }
