@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Registro</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/img/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/css/util2.css">
+	<link rel="stylesheet" type="text/css" href="/css/main2.css">
+<!--===============================================================================================-->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.js"></script>
+<script>
+    // some data we'll use
+    document.addEventListener('DOMContentLoaded', function () {
+	const vm = new Vue({
+        el: '#sg1',
+        data: {
+          backend: "http://localhost:1337"
+        },
+        methods: {
+          async onRegister(e) {
+			const result = await axios.get(vm.$data.backend+'/usuarios?email='+e.target.elements[1].value )
+			if(result.data.length != 0){
+				alert("Ya existe un usuario registrado con este correo")
+			}else{
+				const result2 = await axios.post(vm.$data.backend+'/usuarios',{
+					nombre:e.target.elements[0].value, 
+					apellido:"",
+					email:e.target.elements[1].value,
+					contrasena:e.target.elements[2].value 
+				})
+				alert("Se ha registrado con Exito")
+				window.location.href="/login"
+			}
+		  }
+		}
+      })
+    })
+  </script>
+</head>
+<body style="background-color: #999999;">
+	
+	<div class="limiter" id="sg1">
+		<div class="container-login100">
+			<div class="login100-more" style="background-image: url('/img/bg-01.jpg');"></div>
+
+			<div class="wrap-login100 p-l-50 p-r-50 p-t-72 p-b-50">
+				<form class="login100-form validate-form"  v-on:submit.prevent="onRegister">
+					<span class="login100-form-title p-b-59" style="margin-left: 130px;">
+						Registro
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="Campo Requerido">
+						<span class="label-input100">Nombre Completo</span>
+						<input class="input100" type="text" name="name" placeholder="Nombre">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Introduzca Correo Válido: ex@abc.xyz">
+						<span class="label-input100">Correo</span>
+						<input class="input100" type="text" name="email" placeholder="Correo">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Campo Requerido">
+						<span class="label-input100">Contraseña</span>
+						<input class="input100" type="password" name="pass" placeholder="*************">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Campo Requerido">
+						<span class="label-input100">Repita Contraseña</span>
+						<input class="input100" type="password" name="repeat-pass" placeholder="*************">
+						<span class="focus-input100"></span>
+					</div>
+		
+					
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn" type="submit">
+								Registrarse
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+<!--===============================================================================================-->
+	<script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/bootstrap/js/popper.js"></script>
+	<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/daterangepicker/moment.min.js"></script>
+	<script src="/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="/js/main.js"></script>
+
+</body>
+</html>
